@@ -1443,21 +1443,20 @@ cpdefine("inline:com-chilipeppr-workspace-grbl", ["chilipeppr_ready"], function(
 
 
 
-            // GRBL
-            // http://jsfiddle.net/jarret/b5L2rtgc/ //alternate test version of grbl controller
-            // com-chilipeppr-grbl
+            // Smoothieboard Specific Widget (like grbl, but changes the INIT, eliminates any buffer limitations)
+            // com-chilipeppr-Smoothie
             chilipeppr.load(
-                "com-chilipeppr-grbl",
-                "http://fiddle.jshell.net/jarret/9aaL8jg4/show/light/",
+                "com-chilipeppr-Smoothie",
+                "https://raw.githubusercontent.com/jarretluft/widget-smoothie/master/auto-generated-widget.html",
 
                 function() {
                     cprequire(
-                        ["inline:com-chilipeppr-widget-grbl"], //"inline:com-chilipeppr-widget-spconsole"],
+                        ["inline:com-chilipeppr-widget-Smoothie"], //"inline:com-chilipeppr-widget-spconsole"],
                         //, "inline:com-chilipeppr-serialport-spselector"],
 
-                        function(grbl) { //,spconsole) {
+                        function(smoothie) { //,spconsole) {
 
-                            grbl.init();
+                            smoothie.init();
 
                         });
                 });
