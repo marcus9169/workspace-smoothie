@@ -1,5 +1,5 @@
 /* global cpdefine chilipeppr cprequire */
-cprequire_test(["inline:com-chilipeppr-workspace-grbl"], function(ws) {
+cprequire_test(["inline:com-chilipeppr-workspace-smoothie"], function(ws) {
 
     console.log("initting workspace");
 
@@ -27,20 +27,20 @@ cprequire_test(["inline:com-chilipeppr-workspace-grbl"], function(ws) {
     ws.init();
 
     // Do some niceties for testing like margins on widget and title for browser
-    $('title').html("grbl Workspace");
+    $('title').html("Smoothieboard Workspace");
     $('body').css('padding', '10px');
 
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-workspace-grbl", ["chilipeppr_ready"], function() {
+cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-workspace-grbl", // Make the id the same as the cpdefine id
-        name: "Workspace / grbl", // The descriptive name of your widget.
-        desc: `A ChiliPeppr Workspace grbl.`,
+        id: "com-chilipeppr-workspace-smoothie", // Make the id the same as the cpdefine id
+        name: "Workspace / Smoothieboard", // The descriptive name of your widget.
+        desc: `A ChiliPeppr Workspace for Smoothieboard.`,
         url: "(auto fill by runme.js)", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
         fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
         githuburl: "(auto fill by runme.js)", // The backing github repo
@@ -1242,7 +1242,7 @@ cpdefine("inline:com-chilipeppr-workspace-grbl", ["chilipeppr_ready"], function(
                             //bind the zero out button to G92 instead of G28
                             $('#com-chilipeppr-widget-xyz-ftr .jogzeroout').unbind("click");
                             $('#com-chilipeppr-widget-xyz-ftr .jogzeroout').click("xyz", xyz.zeroOutAxisG92.bind(xyz));
-                            $('#com-chilipeppr-widget-xyz-ftr .jogzeroout').attr("data-content", "G92 X0 Y0 Z0 - Temporary offsets will be lost with grbl soft reset (ctrl+x) or when an M2 or M30 command is executed");
+                            $('#com-chilipeppr-widget-xyz-ftr .jogzeroout').attr("data-content", "G92 X0 Y0 Z0 - Temporary offsets will be lost with soft reset (ctrl+x) or when an M2 or M30 command is executed");
 
                             //update homing pop-up
                             $('#com-chilipeppr-widget-xyz-ftr .joghome').attr("data-content", "$H homing cycle - Must have limit switches and homing enabled in GRBL settings");
@@ -1404,16 +1404,16 @@ cpdefine("inline:com-chilipeppr-workspace-grbl", ["chilipeppr_ready"], function(
                             var oldOnRecvLine = spc.onRecvLine.bind(spc);
                             var newOnRecvLine = function(data) {
                                 //ignore incoming status update to keep console clear otherwise continue with original function
-                                console.log("GRBL: AltOnRecvLine: " + data.dataline);
-                                if (data.dataline.search(/^<|^\$G|^\?|^\[/) < 0 || $('#com-chilipeppr-widget-grbl .grbl-verbose').hasClass("enabled")) {
+                                console.log("Smoothie: AltOnRecvLine: " + data.dataline);
+                                if (data.dataline.search(/^<|^\$G|^\?|^\[/) < 0 || $('#com-chilipeppr-widget-Smoothie .Smoothie-verbose').hasClass("enabled")) {
                                     data.dataline = data.dataline.replace("<", "&lt;").replace(">", "&gt;");
                                     oldOnRecvLine(data);
                                 }
                             };
                             var oldJsonOnQueue = spc.jsonOnQueue.bind(spc);
                             var newJsonOnQueue = function(data) {
-                                console.log("GRBL: AltJsonOnQueue: " + data);
-                                if (data.D.search(/^<|^\$G|^\?|^\[/) < 0 || $('#com-chilipeppr-widget-grbl .grbl-verbose').hasClass("enabled")) {
+                                console.log("Smoothie: AltJsonOnQueue: " + data);
+                                if (data.D.search(/^<|^\$G|^\?|^\[/) < 0 || $('#com-chilipeppr-widget-Smoothie .Smoothie-verbose').hasClass("enabled")) {
                                     data.D = data.D.replace("<", "&lt;").replace(">", "&gt;");
                                     oldJsonOnQueue(data);
                                 }
@@ -1489,7 +1489,7 @@ cpdefine("inline:com-chilipeppr-workspace-grbl", ["chilipeppr_ready"], function(
                         function(sp) {
                             sp.setSingleSelectMode();
                             //sp.init("192.168.1.7");
-                            sp.init(null, "grbl");
+                            sp.init(null, "smoothie");
                             //$('.com-chilipeppr-widget-serialport-console').removeClass("hidden");
                             //$('.com-chilipeppr-widget-serialport-consoleinput').removeClass("hidden");
                             //$('.com-chilipeppr-widget-serialport-status').removeClass("hidden");
