@@ -1339,6 +1339,37 @@ var getMainPage = function() {
   return html;
 }
 
+// var getGithubUrl = function(callback) {
+
+//   // new approach. use the command line from git
+//   // git config --get remote.origin.url
+  
+//   var childproc = require('child_process');
+//   var cmd = 'git config --get remote.origin.url';
+
+//   var stdout = childproc.execSync(cmd, { encoding: 'utf8' });
+//   //console.log("Got the following Github URL:", stdout);
+
+//   var re = /.*github.com:/i;
+//   var url = stdout.replace(re, "");
+//   url = url.replace(/.git[\s\S]*$/i, ""); // remove end
+  
+//   // prepend with clean githut url
+//   url = "http://github.com/" + url;
+  
+//   var rawurl = url.replace(/\/github.com\//i, "/raw.githubusercontent.com/");
+//   rawurl += '/master/' + fileAutoGeneratePath;
+  
+//   var ret = {
+//     url: url,
+//     rawurl : rawurl
+//   };
+  
+//   //console.log("ret:", ret);
+//   return ret;
+    
+// }
+
 var getGithubUrl = function(callback) {
 
   // new approach. use the command line from git
@@ -1350,15 +1381,18 @@ var getGithubUrl = function(callback) {
   var stdout = childproc.execSync(cmd, { encoding: 'utf8' });
   //console.log("Got the following Github URL:", stdout);
 
-  var re = /.*github.com:/i;
+  var re = "https://github.com/";
   var url = stdout.replace(re, "");
-  url = url.replace(/.git[\s\S]*$/i, ""); // remove end
+  url = url.replace(".git", ""); // remove end
   
-  // prepend with clean githut url
-  url = "http://github.com/" + url;
-  
-  var rawurl = url.replace(/\/github.com\//i, "/raw.githubusercontent.com/");
+  var rawurl = "https://raw.githubusercontent.com/" + url;
   rawurl += '/master/' + fileAutoGeneratePath;
+  
+  rawurl = rawurl.replace(/\r?\n|\r/g, ""); // remove end
+  
+  url = 'http://github.com/' + url;
+  
+  url = url.replace(/\r?\n|\r/g, ""); // remove end
   
   var ret = {
     url: url,

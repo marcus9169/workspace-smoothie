@@ -164,7 +164,7 @@ body.hover {
     <script type='text/javascript'>
     //<![CDATA[
 /* global cpdefine chilipeppr cprequire */
-cprequire_test(["inline:com-chilipeppr-workspace-smoothie"], function(ws) {
+cprequire_test(["inline:com-chilipeppr-workspace-smoothie-vt"], function(ws) {
 
     console.log("initting workspace");
 
@@ -198,18 +198,18 @@ cprequire_test(["inline:com-chilipeppr-workspace-smoothie"], function(ws) {
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], function() {
+cpdefine("inline:com-chilipeppr-workspace-smoothie-vt", ["chilipeppr_ready"], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-workspace-smoothie", // Make the id the same as the cpdefine id
+        id: "com-chilipeppr-workspace-smoothie-vt", // Make the id the same as the cpdefine id
         name: "Workspace / Smoothieboard", // The descriptive name of your widget.
         desc: `A ChiliPeppr Workspace for Smoothieboard.`,
-        url: "http://raw.githubusercontent.com/jarretluft/workspace-smoothie/master/auto-generated-workspace.html", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
-        fiddleurl: "http://ide.c9.io/jarretluft/workspace-smoothie", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
-        githuburl: "http://github.com/jarretluft/workspace-smoothie", // The backing github repo
-        testurl: "http://workspace-smoothie-jarretluft.c9users.io/workspace.html", // The standalone working widget so can view it working by itself
+        url: "https://raw.githubusercontent.com/marcus9169/workspace-smoothie-vt/master/auto-generated-workspace.html", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
+        fiddleurl: "http://ide.c9.io/root/CNC", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
+        githuburl: "http://github.com/marcus9169/workspace-smoothie-vt", // The backing github repo
+        testurl: "http://CNC-root.c9users.io/workspace.html", // The standalone working widget so can view it working by itself
         /**
          * Contains reference to the Console widget object. Hang onto the reference
          * so we can resize it when the window resizes because we want it to manually
@@ -430,37 +430,62 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], funct
                     });
                 });
 
-            // Auto-Leveller
-            // com-chilipeppr-ws-autolevel
-            // hiding auto leveller as unsure what features supported in grbl. will come back to this.
-            // http:jsfiddle.net/jarret/uvVL6/
-            
-            chilipeppr.load(
-                "#com-chilipeppr-ws-autolevel",
-                "http://raw.githubusercontent.com/chilipeppr-grbl/grbl-widget-autolevel/master/auto-generated-widget.html",
-                function() {
-                    require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
-                        autolevel.init();
-                        // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
-                        var alDiv = $('#com-chilipeppr-ws-autolevel');
-                        alBtn.click(function() {
-                            if (alDiv.hasClass("hidden")) {
-                                // unhide
-                                alDiv.removeClass("hidden");
-                                alBtn.addClass("active");
-                                autolevel.onDisplay();
-                            }
-                            else {
-                                alDiv.addClass("hidden");
-                                alBtn.removeClass("active");
-                                autolevel.onUndisplay();
-                            }
-                            $(window).trigger('resize');
 
-                        });
-                    });
-                });
+
+chilipeppr.load(
+  "#com-chilipeppr-ws-autolevel",
+  "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
+  function() {
+    // Callback after widget loaded into #myDivWidgetAutolevel
+    // Now use require.js to get reference to instantiated widget
+    cprequire(
+      ["inline:com-chilipeppr-widget-autolevel"], // the id you gave your widget
+      function(myObjWidgetAutolevel) {
+        // Callback that is passed reference to the newly loaded widget
+        console.log("Widget / Auto-Level just got loaded.", myObjWidgetAutolevel);
+        myObjWidgetAutolevel.init();
+      }
+    );
+  }
+);
+
+
+            // // Auto-Leveller
+            // // com-chilipeppr-ws-autolevel
+            // // hiding auto leveller as unsure what features supported in grbl. will come back to this.
+            // // http:jsfiddle.net/jarret/uvVL6/
+            
+            // chilipeppr.load(
+            //     "#com-chilipeppr-ws-autolevel",
+            //     "http://raw.githubusercontent.com/chilipeppr-grbl/grbl-widget-autolevel/master/auto-generated-widget.html",
+            //     function() {
+            //         require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
+            //             autolevel.init();
+            //             // setup toggle button
+            //             var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
+            //             var alDiv = $('#com-chilipeppr-ws-autolevel');
+            //             alBtn.click(function() {
+            //                 if (alDiv.hasClass("hidden")) {
+            //                     // unhide
+            //                     alDiv.removeClass("hidden");
+            //                     alBtn.addClass("active");
+            //                     autolevel.onDisplay();
+            //                 }
+            //                 else {
+            //                     alDiv.addClass("hidden");
+            //                     alBtn.removeClass("active");
+            //                     autolevel.onUndisplay();
+            //                 }
+            //                 $(window).trigger('resize');
+
+            //             });
+            //         });
+            //     });
+                
+                
+ 
+ 
+                
             /*
             // Inject new div to contain widget or use an existing div with an ID
             $("body").append('<' + 'div id="myDivWidgetAutolevel"><' + '/div>');
@@ -1683,6 +1708,7 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], funct
         </div>
         <div class="container-fluid">
             <div class="row">
+                <!-- Right column -->
                 <div class="col-xs-3 widgetx padrt left">
                     <!-- 3D Viewer. Must be loaded at top to get z-orders correct -->
                     <div id="com-chilipeppr-3dviewer">Load 3D Viewport Here</div>
@@ -1726,8 +1752,10 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], funct
                     </div>
                     <!-- Zipwhip Text Messaging -->
                     <div class="zhigh hidden" id="com-chilipeppr-ws-zipwhip"></div>
+                    
                     <!-- Auto Leveller -->
                     <div class="zhigh hidden" id="com-chilipeppr-ws-autolevel">Auto-Level Here</div>
+                    
                     <!-- Macro -->
                     <div class="zhigh hidden" id="com-chilipeppr-ws-macro">Macro Here</div>
                     <!-- JScut -->
@@ -1754,6 +1782,7 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], funct
                         <div id="com-chilipeppr-3dviewer-controlpanel" style=""></div>
                     </div>
                 </div>
+                <!-- Left column -->
                 <div class="col-xs-3 nopadding">
                     <!-- XYZ -->
                     <div id="com-chilipeppr-xyz" class="">Load XYZ Here</div>

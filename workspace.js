@@ -1,5 +1,5 @@
 /* global cpdefine chilipeppr cprequire */
-cprequire_test(["inline:com-chilipeppr-workspace-smoothie"], function(ws) {
+cprequire_test(["inline:com-chilipeppr-workspace-smoothie-vt"], function(ws) {
 
     console.log("initting workspace");
 
@@ -33,12 +33,12 @@ cprequire_test(["inline:com-chilipeppr-workspace-smoothie"], function(ws) {
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], function() {
+cpdefine("inline:com-chilipeppr-workspace-smoothie-vt", ["chilipeppr_ready"], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-workspace-smoothie", // Make the id the same as the cpdefine id
+        id: "com-chilipeppr-workspace-smoothie-vt", // Make the id the same as the cpdefine id
         name: "Workspace / Smoothieboard", // The descriptive name of your widget.
         desc: `A ChiliPeppr Workspace for Smoothieboard.`,
         url: "(auto fill by runme.js)", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
@@ -265,37 +265,62 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie", ["chilipeppr_ready"], funct
                     });
                 });
 
-            // Auto-Leveller
-            // com-chilipeppr-ws-autolevel
-            // hiding auto leveller as unsure what features supported in grbl. will come back to this.
-            // http:jsfiddle.net/jarret/uvVL6/
-            
-            chilipeppr.load(
-                "#com-chilipeppr-ws-autolevel",
-                "http://raw.githubusercontent.com/chilipeppr-grbl/grbl-widget-autolevel/master/auto-generated-widget.html",
-                function() {
-                    require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
-                        autolevel.init();
-                        // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
-                        var alDiv = $('#com-chilipeppr-ws-autolevel');
-                        alBtn.click(function() {
-                            if (alDiv.hasClass("hidden")) {
-                                // unhide
-                                alDiv.removeClass("hidden");
-                                alBtn.addClass("active");
-                                autolevel.onDisplay();
-                            }
-                            else {
-                                alDiv.addClass("hidden");
-                                alBtn.removeClass("active");
-                                autolevel.onUndisplay();
-                            }
-                            $(window).trigger('resize');
 
-                        });
-                    });
-                });
+
+chilipeppr.load(
+  "#com-chilipeppr-ws-autolevel",
+  "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
+  function() {
+    // Callback after widget loaded into #myDivWidgetAutolevel
+    // Now use require.js to get reference to instantiated widget
+    cprequire(
+      ["inline:com-chilipeppr-widget-autolevel"], // the id you gave your widget
+      function(myObjWidgetAutolevel) {
+        // Callback that is passed reference to the newly loaded widget
+        console.log("Widget / Auto-Level just got loaded.", myObjWidgetAutolevel);
+        myObjWidgetAutolevel.init();
+      }
+    );
+  }
+);
+
+
+            // // Auto-Leveller
+            // // com-chilipeppr-ws-autolevel
+            // // hiding auto leveller as unsure what features supported in grbl. will come back to this.
+            // // http:jsfiddle.net/jarret/uvVL6/
+            
+            // chilipeppr.load(
+            //     "#com-chilipeppr-ws-autolevel",
+            //     "http://raw.githubusercontent.com/chilipeppr-grbl/grbl-widget-autolevel/master/auto-generated-widget.html",
+            //     function() {
+            //         require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
+            //             autolevel.init();
+            //             // setup toggle button
+            //             var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
+            //             var alDiv = $('#com-chilipeppr-ws-autolevel');
+            //             alBtn.click(function() {
+            //                 if (alDiv.hasClass("hidden")) {
+            //                     // unhide
+            //                     alDiv.removeClass("hidden");
+            //                     alBtn.addClass("active");
+            //                     autolevel.onDisplay();
+            //                 }
+            //                 else {
+            //                     alDiv.addClass("hidden");
+            //                     alBtn.removeClass("active");
+            //                     autolevel.onUndisplay();
+            //                 }
+            //                 $(window).trigger('resize');
+
+            //             });
+            //         });
+            //     });
+                
+                
+ 
+ 
+                
             /*
             // Inject new div to contain widget or use an existing div with an ID
             $("body").append('<' + 'div id="myDivWidgetAutolevel"><' + '/div>');
