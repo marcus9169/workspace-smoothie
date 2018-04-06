@@ -279,16 +279,36 @@ chilipeppr.load(
         // Callback that is passed reference to the newly loaded widget
         console.log("Widget / Auto-Level just got loaded.", myObjWidgetAutolevel);
         myObjWidgetAutolevel.init();
+        
+                        // setup toggle button
+                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
+                        var alDiv = $('#com-chilipeppr-ws-autolevel');
+                        alBtn.click(function() {
+                            if (alDiv.hasClass("hidden")) {
+                                // unhide
+                                alDiv.removeClass("hidden");
+                                alBtn.addClass("active");
+                                autolevel.onDisplay();
+                            }
+                            else {
+                                alDiv.addClass("hidden");
+                                alBtn.removeClass("active");
+                                autolevel.onUndisplay();
+                            }
+                            $(window).trigger('resize');
+
+                        });
+        
       }
     );
   }
 );
 
 
-            // // Auto-Leveller
-            // // com-chilipeppr-ws-autolevel
-            // // hiding auto leveller as unsure what features supported in grbl. will come back to this.
-            // // http:jsfiddle.net/jarret/uvVL6/
+            // // // Auto-Leveller
+            // // // com-chilipeppr-ws-autolevel
+            // // // hiding auto leveller as unsure what features supported in grbl. will come back to this.
+            // // // http:jsfiddle.net/jarret/uvVL6/
             
             // chilipeppr.load(
             //     "#com-chilipeppr-ws-autolevel",
