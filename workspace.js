@@ -288,12 +288,12 @@ chilipeppr.load(
                                 // unhide
                                 alDiv.removeClass("hidden");
                                 alBtn.addClass("active");
-                                autolevel.onDisplay();
+                                myObjWidgetAutolevel.onDisplay();
                             }
                             else {
                                 alDiv.addClass("hidden");
                                 alBtn.removeClass("active");
-                                autolevel.onUndisplay();
+                                myObjWidgetAutolevel.onUndisplay();
                             }
                             $(window).trigger('resize');
 
