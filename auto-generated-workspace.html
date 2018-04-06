@@ -434,12 +434,12 @@ cpdefine("inline:com-chilipeppr-workspace-smoothie-vt", ["chilipeppr_ready"], fu
 
 chilipeppr.load(
   "#com-chilipeppr-ws-autolevel",
-  "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
+  "https://raw.githubusercontent.com/marcus9169/widget-autolevel-smoothie-vt/master/auto-generated-widget.html",
   function() {
     // Callback after widget loaded into #myDivWidgetAutolevel
     // Now use require.js to get reference to instantiated widget
     cprequire(
-      ["inline:com-chilipeppr-widget-autolevel-smoothie-vt"], // the id you gave your widget
+      ["inline:widget-autolevel-smoothie-vt"], // the id you gave your widget
       function(myObjWidgetAutolevel) {
         // Callback that is passed reference to the newly loaded widget
         console.log("Widget / Auto-Level just got loaded.", myObjWidgetAutolevel);
